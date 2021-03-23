@@ -1,7 +1,11 @@
 import tkinter as tk
+from tkinter import PhotoImage
 import tkinter.font as tkFont # 引入字体模块
 from tkinter.messagebox import showinfo
+from PIL import Image,ImageTk
 import random
+from tkinter import ttk
+
 
 
 WINWIDTH = 600
@@ -42,6 +46,11 @@ quesft = tkFont.Font(family="微软雅黑", size=16, weight=tkFont.BOLD)
 q1 = tk.Label(win, text=question1, font=quesft, width=label_width, bg="lightblue")
 q1.pack()
 
+photo = Image.open("my_qrcode.png")  #括号里为需要显示在图形化界面里的图片 
+photo = photo.resize((200, 200))
+img0 = ImageTk.PhotoImage(photo)
+img1 = ttk.Label(text="照片:",image=img0)
+
 handle = {}
 handle["control"] = 0
 # 按钮
@@ -77,12 +86,14 @@ def click_want():
     showinfo(title="simple", message=ans_want)
     q4 = tk.Label(win, text=question4, font=quesft, width=label_width, bg="lightyellow")
     q4.pack()
+    img1.pack()
     win.update()
 def click_not_want():
     ans_not_want = "不看也得看"
     showinfo(title="force", message=ans_not_want)
     q4 = tk.Label(win, text=question4, font=quesft, width=label_width, bg="lightyellow")
     q4.pack()
+    img1.pack()
     win.update()
 # 第一次选择(是和不是)
 yes_button = tk.Button(win, text=yes, command=clickyes)
