@@ -55,6 +55,7 @@ handle = {}
 handle["control"] = 0
 # 按钮
 def clickyes():
+    """第一次选择，yes"""
     yes_reply = "哈哈哈，开个玩笑"
     showinfo(title = "This is a joke", message = yes_reply)
     q2 = tk.Label(win, text=question2, font=quesft, width=label_width, bg="lightgreen")
@@ -65,13 +66,16 @@ def clickyes():
     t_n_button.place(x=no_button_x, y=button_y, width=button_width, height=button_height)
     win.update()
 def mouse_in_no(event):
+    """开玩笑"""
     bx, by = random.randint(button_width, WINWIDTH-button_width), random.randint(button_height, WINHEIGHT-button_height)
     no_button.place(x=bx, y=by)
 def click_t_no():
+    """ 直接退出 """
     bye = "那行吧, 再见"
     showinfo(title="bye", message=bye)
     quit()
 def click_t_yes():
+    """ 第二次选择 """
     ans_t_yes = "那我要开始了"
     t_n_button.destroy()
     t_y_button.destroy()
@@ -82,6 +86,7 @@ def click_t_yes():
     q3.pack()
     win.update()
 def click_want():
+    """ 表示想看 """
     ans_want = "算你识相"
     showinfo(title="simple", message=ans_want)
     q4 = tk.Label(win, text=question4, font=quesft, width=label_width, bg="lightyellow")
@@ -89,6 +94,7 @@ def click_want():
     img1.pack()
     win.update()
 def click_not_want():
+    """ 表示不想看 """
     ans_not_want = "不看也得看"
     showinfo(title="force", message=ans_not_want)
     q4 = tk.Label(win, text=question4, font=quesft, width=label_width, bg="lightyellow")
