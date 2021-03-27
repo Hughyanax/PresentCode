@@ -7,7 +7,6 @@ from PIL import Image, ImageTk
 from pygame import *
 from sys import exit
 
-print("Hello")
 WIN_WIDTH = 600
 WIN_HEIGHT = 450
 WIN_X = 200
@@ -48,7 +47,11 @@ win.geometry("%sx%s+%s+%s" % (WIN_WIDTH, WIN_HEIGHT, WIN_X, WIN_Y))
 question_font = tkFont.Font(family="微软雅黑", size=16, weight=tkFont.BOLD)
 
 
-def make_label(window=win, l_t=None, font=question_font, bg_color=None, l_w=label_width):
+def make_label(window=win,
+               l_t=None,
+               font=question_font,
+               bg_color=None,
+               l_w=label_width):
     return tk.Label(window, text=l_t, font=font, bg=bg_color, width=l_w)
 
 
@@ -215,6 +218,6 @@ button2.place(x=no_button_x,
 button3 = tk.Button(win, text=truly_no, command=click_t_no)
 button4 = tk.Button(win, text=end, command=end_music)
 button1.bind("<Motion>", mouse_in_no)
-path='Lost stars.mp3'
+path = 'Lost stars.mp3'
 win.update()
 win.mainloop()
