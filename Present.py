@@ -4,7 +4,7 @@ import tkinter.font as tkFont  # 引入字体模块
 from tkinter import ttk
 from tkinter.messagebox import showinfo
 from PIL import Image, ImageTk
-from pygame import *
+import pygame
 from sys import exit
 
 WIN_WIDTH = 600
@@ -64,7 +64,7 @@ q5 = make_label(l_t=question5, bg_color="lightgreen")
 q6 = make_label(l_t=question6, bg_color="lightyellow")
 q7 = make_label(bg_color="lightblue")
 q8 = make_label(l_t=question5, bg_color="lightgreen")
-
+path = 'Lost stars.mp3'
 photo = Image.open("my_qrcode.png")  # 括号里为需要显示在图形化界面里的图片
 photo = photo.resize((200, 200))
 img0 = ImageTk.PhotoImage(photo)
@@ -157,12 +157,11 @@ def click_ended():
     play_music()
 
 
-def play_music(path='Lost stars.mp3'):
+def play_music(path=path):
     pygame.init()
     pygame.mixer.init()
     pygame.mixer.music.load(path)
-    # pygame.mixer.music.set_volume(0.5)
-    pygame.mixer.music.play()
+    pygame.mixer.music.play(-1)
 
 
 handle["control"] = 0
@@ -178,7 +177,7 @@ def pause_music():
 
 def continue_music():
     if handle["control"]:
-        pygame.mixer.music.play()
+        pygame.mixer.music.unpause()
         handle["control"] = 0
     else:
         showinfo(title="playing", message="音乐已经播放了")
@@ -218,6 +217,5 @@ button2.place(x=no_button_x,
 button3 = tk.Button(win, text=truly_no, command=click_t_no)
 button4 = tk.Button(win, text=end, command=end_music)
 button1.bind("<Motion>", mouse_in_no)
-path = 'Lost stars.mp3'
 win.update()
 win.mainloop()
