@@ -54,9 +54,12 @@ def make_label(window=win,
                l_w=label_width):
     return tk.Label(window, text=l_t, font=font, bg=bg_color, width=l_w)
 
-
-q1 = make_label(l_t=question1, bg_color="lightblue")
-q1.pack()
+q00 = make_label(l_t="填充", bg_color="lightgreen", l_w=10)
+q01 = make_label(l_t="填充", bg_color="lightyellow", l_w=10)
+q1 = make_label(l_t=question1, bg_color="lightblue") # "今天是你生日吗？"
+q1.grid(column=1)
+q01.grid(row=0, column=0)
+q00.grid(row=0, column=2)
 q2 = make_label(l_t=question2, bg_color="lightgreen")
 q3 = make_label(l_t=question3, bg_color="lightyellow")
 q4 = make_label(l_t=question4, bg_color="lightblue")
@@ -76,24 +79,27 @@ handle = {"control": 1}
 def click_no():
     """第一次选择，no"""
     showinfo(title="This is a joke", message="哈哈哈，开个玩笑")
-    q2.pack()
+    q2.grid(column=1)
     button2.config(text=truly_yes, command=click_t_yes)
-    button2.place(x=yes_button_x,
-                  y=button_y,
-                  width=button_width,
-                  height=button_height)
+    # button2.place(x=yes_button_x,
+    #               y=button_y,
+    #               width=button_width,
+    #               height=button_height)
+    button2.grid(row=1, column=2, sticky="W E S N")
     button1.destroy()
-    button3.place(x=no_button_x,
-                  y=button_y,
-                  width=button_width,
-                  height=button_height)
+    # button3.place(x=no_button_x,
+    #               y=button_y,
+    #               width=button_width,
+    #               height=button_height)
+    button3.grid(row=1, column=0, sticky="W E S N")
     win.update()
 
 
 def mouse_in_no(event):
     """开玩笑"""
-    button1.place(x=random.randint(button_width, WIN_WIDTH - button_width),
-                  y=random.randint(button_height, WIN_HEIGHT - button_height))
+    pass
+    # button1.place(x=random.randint(button_width, WIN_WIDTH - button_width),
+    #               y=random.randint(button_height, WIN_HEIGHT - button_height))
 
 
 def click_t_no():
@@ -107,7 +113,7 @@ def click_t_yes():
     button2.config(text=want, command=click_want)
     button3.config(text=not_want, command=click_not_want)
     showinfo(title="good", message="那我要开始了")
-    q3.pack()
+    q3.grid(column=1, sticky="E")
     win.update()
 
 
@@ -116,8 +122,8 @@ def click_want():
     showinfo(title="force", message="算你识相")
     button2.config(text=finish1, command=click_finish)
     button3.config(text=finish2, command=click_finish)
-    q4.pack()
-    img1.pack()
+    q4.grid(column=1)
+    img1.grid(column=1)
     win.update()
 
 
@@ -126,23 +132,23 @@ def click_not_want():
     showinfo(title="simple", message="不看也得看")
     button2.config(text=finish1, command=click_finish)
     button3.config(text=finish2, command=click_finish)
-    q4.pack()
-    img1.pack()
+    q4.grid(row=1, column=1)
+    img1.grid(column=1)
     win.update()
 
 
 def click_finish():
     """ 扫好了 """
     img1.destroy()
-    q5.pack()
+    q5.grid(column=1)
     button2.config(text=it_ended, command=click_ended)
     button3.config(text=not_yet, command=click_not_yet)
 
 
 def click_not_yet():
     showinfo(title="you are right", message="猜对了, 后面还有呢！")
-    q6.pack()
-    button4.pack()
+    q6.grid(column=1)
+    button4.grid(row=1, column=1, sticky="W E S N")
     button2.config(text="暂停", command=pause_music)
     button3.config(text="播放", command=continue_music)
     play_music()
@@ -150,8 +156,8 @@ def click_not_yet():
 
 def click_ended():
     showinfo(title="you are wrong", message="错了, 后面还有呢！")
-    q6.pack()
-    button4.pack()
+    q6.grid(column=1)
+    button4.grid(row=1, column=1, sticky="W E S N")
     button2.config(text="暂停", command=pause_music)
     button3.config(text="播放", command=continue_music)
     play_music()
@@ -198,22 +204,24 @@ def click_t_not_yet():
 def end_music():
     pygame.mixer.music.pause()
     button4.pack_forget()
-    q8.pack()
+    q8.grid(column=1)
     button2.config(text=it_ended, command=click_t_ended)
     button3.config(text=not_yet, command=click_t_not_yet)
 
 
 # 第一次选择(是和不是)
 button1 = tk.Button(win, text=yes)
-button1.place(x=yes_button_x,
-              y=button_y,
-              width=button_width,
-              height=button_height)
+# button1.place(x=yes_button_x,
+#               y=button_y,
+#               width=button_width,
+#               height=button_height)
+button1.grid(row=10, column=0,sticky="W E S N")
 button2 = tk.Button(win, text=no, command=click_no)
-button2.place(x=no_button_x,
-              y=button_y,
-              width=button_width,
-              height=button_height)
+# button2.place(x=no_button_x,
+#               y=button_y,
+#               width=button_width,
+#               height=button_height)
+button2.grid(row=10, column=2, sticky="W E S N")
 button3 = tk.Button(win, text=truly_no, command=click_t_no)
 button4 = tk.Button(win, text=end, command=end_music)
 button1.bind("<Motion>", mouse_in_no)
